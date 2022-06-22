@@ -12,3 +12,9 @@ type UnionToIntersection<T> =
   (x: infer R) => any ? R : never
 type ObjectArrayToIntersection<T extends any[]> = UnionToIntersection<T[number]>
 ```
+```ts
+type CreateProps<NPS extends DeclareName<string, [Keywords, unknown]>[]>
+  = ObjectArrayToIntersection<
+    {[K in keyof NPS]: { [LK in NPS[K][0][1]]: NPS[K][1][1] }}
+  >
+```
