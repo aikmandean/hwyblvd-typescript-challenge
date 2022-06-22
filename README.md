@@ -20,6 +20,9 @@ type LabeledEntryCreate<H extends string,NTM> = [[H, Uncapitalize<H>],NTM]
 type ParseLE<HNTM extends LabeledEntryCreate<string,["prop",any,any]>> = 
     HNTM extends [[string, infer LK], ["prop", infer T, any]] ? {[K in LK]: T} : never
 ```
+```ts
+type ObjectObjectToIntersection<T extends {[x:string]:{}}> = UnionToIntersection<T[keyof T]>
+```
 > Playground Day 1
   
 ```ts
