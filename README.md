@@ -18,3 +18,10 @@ type CreateProps<NPS extends DeclareName<string, [Keywords, unknown]>[]>
     {[K in keyof NPS]: { [LK in NPS[K][0][1]]: NPS[K][1][1] }}
   >
 ```
+```ts
+type Count = DeclareName<"Count", DefineParam<number>>
+type SetCount = DeclareName<"SetCount", DefineParam<(n: number) => void>>
+function HelloWorld(props: CreateProps<[Count, SetCount]>) {
+  props
+}
+```
