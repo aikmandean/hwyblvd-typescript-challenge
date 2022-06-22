@@ -10,18 +10,16 @@ Rules to the challenge: "Who am I?"
 > Playground Day 2
   
 ```ts
-type DefinitionWrite<N,T,M> = abstract new () => [N,T,M]
-```
-```ts
 type EntryCreate<N,T,M> = abstract new () => [N,T,M]
 type EntryRead<A> = A extends abstract new () => infer NTM ? NTM : never
 type LabeledEntryCreate<H extends string,NTM> = [[H, Uncapitalize<H>],NTM]
-
-type ParseLE<HNTM extends LabeledEntryCreate<string,["prop",any,any]>> = 
-    HNTM extends [[string, infer LK], ["prop", infer T, any]] ? {[K in LK]: T} : never
 ```
 ```ts
 type ObjectObjectToIntersection<T extends {[x:string]:{}}> = UnionToIntersection<T[keyof T]>
+```
+```ts
+type ParseLE<HNTM extends LabeledEntryCreate<string,["prop",any,any]>> = 
+    HNTM extends [[string, infer LK], ["prop", infer T, any]] ? {[K in LK]: T} : never
 ```
 ```ts
 declare function defineProp<T,M>(likeKind: T, optionalMetadata?: M): EntryCreate<"prop", T, M>
