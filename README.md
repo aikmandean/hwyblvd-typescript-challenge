@@ -39,6 +39,9 @@ function AddItsDouble(props = of({PrintPair})) {}
 Separate params from functions by creating pair boxes. 
 Pairs are a good way to keep track of any underlying metadata. 
 Arrays of pairs holding mixed type pairs can recover organization.
+Two layers of pair boxes make sense, because data is supplied in 
+two discrete steps. The end result is a NPS, a labelled content 
+that is a param, function, or return.
 ```ts
 type DefineParam<P> = ["param", P]
 type DefineFunction<F> = ["function", F]
@@ -53,12 +56,14 @@ type UnionToIntersection<T> =
   (x: infer R) => any ? R : never
 type ObjectArrayToIntersection<T extends any[]> = UnionToIntersection<T[number]>
 ```
+Convert the NPS into a props object for React.
 ```ts
 type CreateProps<NPS extends DeclareName<string, [Keywords, unknown]>[]>
   = ObjectArrayToIntersection<
     {[K in keyof NPS]: { [LK in NPS[K][0][1]]: NPS[K][1][1] }}
   >
 ```
+Show how it can be done using TypeScript
 ```ts
 type Count = DeclareName<"Count", DefineParam<number>>
 type SetCount = DeclareName<"SetCount", DefineParam<(n: number) => void>>
@@ -66,6 +71,11 @@ function HelloWorld(props: CreateProps<[Count, SetCount]>) {
   props
 }
 ```
+Show how it can be using JavaScript
+  
+Using classes as the closest to solve for the None type 
+the challenge demands. No type exists to provide a solution 
+to composable functions.
 ```ts
 const Count = class { 0 = Number }
 const SetCount = class { 0 = (n = 1) => {} }
