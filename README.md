@@ -12,7 +12,14 @@ Rules to the challenge: "Who am I?"
 ```ts
 type DefinitionWrite<N,T,M> = abstract new () => [N,T,M]
 ```
+```ts
+type EntryCreate<N,T,M> = abstract new () => [N,T,M]
+type EntryRead<A> = A extends abstract new () => infer NTM ? NTM : never
+type LabeledEntryCreate<H extends string,NTM> = [[H, Uncapitalize<H>],NTM]
 
+type ParseLE<HNTM extends LabeledEntryCreate<string,["prop",any,any]>> = 
+    HNTM extends [[string, infer LK], ["prop", infer T, any]] ? {[K in LK]: T} : never
+```
 > Playground Day 1
   
 ```ts
