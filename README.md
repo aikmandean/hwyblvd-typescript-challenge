@@ -7,7 +7,13 @@ Rules to the challenge: "Who am I?"
 5. Functions can be deconstructed into them.
 6. Functions can take other functions using their deconstructor.
 
-> Playground
+> Playground Day 2
+  
+```ts
+type DefinitionWrite<N,T,M> = abstract new () => [N,T,M]
+```
+
+> Playground Day 1
   
 ```ts
 type DefineParam<P> = ["param", P]
@@ -41,3 +47,4 @@ const SetCount = class { 0 = (n = 1) => {} }
 function HelloWorld(props = createProps({Count,SetCount})) {
   props
 }
+```
