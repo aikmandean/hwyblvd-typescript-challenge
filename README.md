@@ -1,4 +1,14 @@
 # hwyblvd
+Rules to the challenge: "Who am I?"
+1. Created like global addresses.
+2. Has a None type.
+3. Uses "Uncapitalized" case when passed to functions.
+4. Functions can take more than one.
+5. Functions can be deconstructed into them.
+6. Functions can take other functions using their deconstructor.
+
+> Playground
+  
 ```ts
 type DefineParam<P> = ["param", P]
 type DefineFunction<F> = ["function", F]
@@ -25,3 +35,9 @@ function HelloWorld(props: CreateProps<[Count, SetCount]>) {
   props
 }
 ```
+```ts
+const Count = class { 0 = Number }
+const SetCount = class { 0 = (n = 1) => {} }
+function HelloWorld(props = createProps({Count,SetCount})) {
+  props
+}
