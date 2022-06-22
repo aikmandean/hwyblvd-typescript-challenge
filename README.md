@@ -23,6 +23,12 @@ type ParseLE<HNTM extends LabeledEntryCreate<string,["prop",any,any]>> =
 ```ts
 type ObjectObjectToIntersection<T extends {[x:string]:{}}> = UnionToIntersection<T[keyof T]>
 ```
+```ts
+declare function defineProp<T,M>(likeKind: T, optionalMetadata?: M): EntryCreate<"prop", T, M>
+
+declare function of<T>(t:T): ObjectObjectToIntersection<{ [K in keyof T]: T[K] extends (a: infer P, ...args: any[]) => any ? P extends {} ? P : {} : ParseLE<LabeledEntryCreate<K,EntryRead<T[K]>>>}>
+```
+  
 > Playground Day 1
   
 ```ts
