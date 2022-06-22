@@ -36,6 +36,9 @@ function AddItsDouble(props = of({PrintPair})) {}
   
 > Playground Day 1
   
+Separate params from functions by creating pair boxes. 
+Pairs are a good way to keep track of any underlying metadata. 
+Arrays of pairs holding mixed type pairs can recover organization.
 ```ts
 type DefineParam<P> = ["param", P]
 type DefineFunction<F> = ["function", F]
@@ -43,6 +46,7 @@ type DefineReturn<R> = ["return", R]
 type DeclareName<N extends string,U> = [[N, Uncapitalize<N>],U]
 type Keywords = "param" | "function" | "return"
 ```
+Some helper types for changing the names of an object's properties.
 ```ts
 type UnionToIntersection<T> = 
 (T extends any ? (x: T) => any : never) extends 
