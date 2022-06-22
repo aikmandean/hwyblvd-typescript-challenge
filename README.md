@@ -26,6 +26,13 @@ declare function defineProp<T,M>(likeKind: T, optionalMetadata?: M): EntryCreate
 
 declare function of<T>(t:T): ObjectObjectToIntersection<{ [K in keyof T]: T[K] extends (a: infer P, ...args: any[]) => any ? P extends {} ? P : {} : ParseLE<LabeledEntryCreate<K,EntryRead<T[K]>>>}>
 ```
+```ts
+const Count = defineProp(0)
+const Double = defineProp(0)
+
+function PrintPair(props = of({Count, Double})) {}
+function AddItsDouble(props = of({PrintPair})) {}
+```
   
 > Playground Day 1
   
