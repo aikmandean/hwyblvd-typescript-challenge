@@ -9,7 +9,18 @@ Rules to the challenge: "Who am I?"
 7. They can be nullified.
 8. They can be optional.
 9. Functions may or may not include deconstruction behavior.
-
+  
+> Playground Day 3
+  
+```ts
+type IsOptional = {[s:symbol]:"Optional"}
+type DefineProp<T,M> = M extends {default:boolean} ? T & IsOptional : T
+```
+```ts
+type A = DefineProp<1,{}>
+type B = DefineProp<1,{ default: true }>
+```
+  
 > Playground Day 2
   
 ```ts
