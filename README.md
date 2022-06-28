@@ -6,6 +6,9 @@ Rules to the challenge: "Who am I?"
 4. Functions can take more than one.
 5. Functions can be deconstructed into them.
 6. Functions can take other functions using their deconstructor.
+7. They can be nullified.
+8. They can be optional.
+9. Functions may or may not include deconstruction behavior.
 
 > Playground Day 2
   
