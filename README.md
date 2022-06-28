@@ -20,6 +20,24 @@ type DefineProp<T,M> = M extends {default:boolean} ? T & IsOptional : T
 type A = DefineProp<1,{}>
 type B = DefineProp<1,{ default: true }>
 ```
+Primitives can store flags in symbol storage. Not possible at runtime, 
+but able to be passed as prop types.
+```ts
+type T = {[s:symbol]: "T"}
+type F = {[s:symbol]: "F"}
+
+type A = 1
+type B = 1 & F
+type C = 1 & T
+type D = 1 & T & F
+
+type IsTrue<L> = L extends T ? L : "NOT TRUE"
+
+type AT = IsTrue<A>
+type BT = IsTrue<B>
+type CT = IsTrue<C>
+type DT = IsTrue<D>
+```
   
 > Playground Day 2
   
