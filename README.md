@@ -23,6 +23,7 @@ type B = DefineProp<1,{ default: true }>
   
 > Playground Day 2
   
+
 ```ts
 type EntryCreate<N,T,M> = abstract new () => [N,T,M]
 type EntryRead<A> = A extends abstract new () => infer NTM ? NTM : never
@@ -40,6 +41,8 @@ declare function defineProp<T,M>(likeKind: T, optionalMetadata?: M): EntryCreate
 
 declare function of<T>(t:T): ObjectObjectToIntersection<{ [K in keyof T]: T[K] extends (a: infer P, ...args: any[]) => any ? P extends {} ? P : {} : ParseLE<LabeledEntryCreate<K,EntryRead<T[K]>>>}>
 ```
+Functions distinguished from other props. Their own prop requirements 
+are deconstructed into individual parts.
 ```ts
 const Count = defineProp(0)
 const Double = defineProp(0)
