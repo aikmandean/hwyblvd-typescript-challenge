@@ -1,4 +1,60 @@
 # hwyblvd
+    
+Updates to the challenge: "Who am I?"
+1. Created in batches.
+2. Has a None type.
+3. [No] Uses "Uncapitalized" case when passed to functions.
+4. Functions can take more than one.
+5. Functions can be deconstructed into them.
+6. Functions can take other functions using their deconstructor.
+7. [No] They can be nullified.
+8. They can be optional.
+9. Functions may or may not include deconstruction behavior. 
+10. Supports editor go-to-reference, sticky comments, global rename.
+
+> Playground Day 4
+
+```ts
+const {
+    count,
+    label
+} = defineProps({
+    /** example comment is "sticky", so all users of count see the same comment */
+    count: 0,
+    label: ""
+})
+label.label
+
+const {
+    doubleCount
+} = defineStore({
+    /** sticky comments work even for advanced cases when fully replacing the type */
+    doubleCount: f(props => {
+        return props.count * 2
+    }, count)
+})
+doubleCount.doubleCount
+
+
+type PropExpansion<T extends {[propNames: string]: unknown}> =
+    { [K in keyof T]: Pick<T, K>  }
+type StoreExpansion<T extends {[funcNames: string]: (props: any) => any}> =
+    { [K in keyof T]: { [K1 in K]: ReturnType<T[K]> } }
+type Func<T,F> = F
+
+type UnionToIntersection<T> = 
+    (T extends any ? (x: T) => any : never) extends 
+        (x: infer R) => any ? R : never
+
+
+declare function defineProps<T extends {[propNames: string]: unknown}>
+    (props: T): PropExpansion<T>
+declare function defineStore<T extends {[funcNames: string]: any}>
+    (props: T): StoreExpansion<T>
+declare function f<T extends {[propsNames: string]: unknown}[],F extends (props: UnionToIntersection<T[number]>) => any>
+    (func: F, ...propDefs: T): F    
+```  
+  
 Rules to the challenge: "Who am I?"
 1. Created like global addresses.
 2. Has a None type.
@@ -8,7 +64,7 @@ Rules to the challenge: "Who am I?"
 6. Functions can take other functions using their deconstructor.
 7. They can be nullified.
 8. They can be optional.
-9. Functions may or may not include deconstruction behavior.
+9. Functions may or may not include deconstruction behavior. 
   
 > Playground Day 3
   
@@ -118,3 +174,4 @@ function HelloWorld(props = createProps({Count,SetCount})) {
   props
 }
 ```
+
